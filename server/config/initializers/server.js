@@ -10,7 +10,7 @@ var config = require("../environments/development");
 
 var routes = require("../../app/routes/index");
 var users = require("../../app/routes/users");
-var diaries = require("../../app/routes/diaries");
+var documents = require("../../app/routes/documents");
 
 
 var app = express();
@@ -29,7 +29,7 @@ require('./passport')(passport);
 // Routes
 app.use('/', routes);
 app.use('/users', users);
-app.use('/diaries', diaries);
+app.use('/documents', documents);
 
 
 /**

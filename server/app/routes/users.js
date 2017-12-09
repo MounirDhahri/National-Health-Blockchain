@@ -11,19 +11,20 @@ let config = require('../../config/environments/development');
 
 // Register new users
 router.post('/register', function(req, res) {
-  if (!req.body.email || !req.body.password || !req.body.firstname || !req.body.lastname || !req.body.birthday  || !req.body.country) {
+  if (!req.body.email || !req.body.password || !req.body.firstname || !req.body.lastname || !req.body.role ) {
     res.json({
       success: false,
       message: 'Please fill in all the required fields.'
     });
   } else {
+
+    // Here we will add the user to its specified blockchain network
     let newUser = new User({
       email: req.body.email,
       password: req.body.password,
       firstname: req.body.firstname,
       lastname: req.body.lastname,
-      birthday: req.body.birthday,
-      country: req.body.country
+      role: req.body.role,
     });
 
     // Attempt to save the user
@@ -31,7 +32,7 @@ router.post('/register', function(req, res) {
       if (err) {
         return res.json({
           success: false,
-          message: 'Mail address already in use'
+          message: 'Something came up'
         });
       }
       res.json({
@@ -86,7 +87,6 @@ router.post('/auth', (req, res) => {
     }
   });
 });
-
 
 
 // Example of required auth: protect dashboard route with JWT

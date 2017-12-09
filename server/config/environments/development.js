@@ -6,6 +6,6 @@ module.exports = {
     secret: 'Little secret, big responsability...'
   },
   database: {
-    local: 'mongodb://localhost/sweetdiary'
+    local: 'mongodb://localhost/tunihack'
   }
 };

@@ -3,19 +3,6 @@ let bcrypt = require('bcrypt');
 let Schema = mongoose.Schema;
 let validate = require('mongoose-validator');
 
-let stringValidator = [
-  validate({
-    validator: 'isLength',
-    arguments: [3, 50],
-    message: 'Name should be between {ARGS[0]} and {ARGS[1]} characters'
-  }),
-  validate({
-    validator: 'isAlphanumeric',
-    passIfEmpty: false,
-    message: 'Name should contain alpha-numeric characters only'
-  })
-];
-
 
 // Schema defines how the user data will be stored in MongoDB
 let UserSchema = new Schema({
@@ -32,25 +19,23 @@ let UserSchema = new Schema({
   firstname: {
     type: String,
     required: true,
-    validate: stringValidator
   },
   lastname: {
     type: String,
     required: true,
-    validate: stringValidator
   },
-  birthday: {
+  Speciality: {
     type: String,
-    required: true
   },
-  country: {
+  address: {
     type: String,
-    required: true,
-    validate: stringValidator
   },
-  diaries: {
-    type: Array,
-    default: []
+  role:{
+    type:String,
+    required:true
+  },
+  key:{
+    type:String,
   }
 });
 

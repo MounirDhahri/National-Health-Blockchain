@@ -1,7 +1,7 @@
 let express = require('express');
 let router = express.Router();
 let passport = require('passport');
-let jwt = require('jsonwebtoken');
+// let jwt = require('jsonwebtoken');
 let User = require('../models/User');
 
 // let multer = require("multer");
@@ -11,6 +11,7 @@ let config = require('../../config/environments/development');
 
 // Register new users
 router.post('/register', function(req, res) {
+  console.log(req.body);
   if (!req.body.email || !req.body.password || !req.body.firstname || !req.body.lastname || !req.body.role ) {
     res.json({
       success: false,
@@ -54,6 +55,7 @@ router.get('/', function(req, res) {
 
 // Authenticate the user and get a JSON Web Token to include in the header of future requests.
 router.post('/auth', (req, res) => {
+  console.log(req.body);
   User.findOne({
     email: req.body.email
   }, function(err, user) {
@@ -69,13 +71,10 @@ router.post('/auth', (req, res) => {
       user.comparePassword(req.body.password, function(err, isMatch) {
         if (isMatch && !err) {
           // Create token if the password matched and no error was thrown
-          let token = jwt.sign(user, config.auth.secret, {
-            expiresIn: "2 days"
-          });
+
           res.json({
             success: true,
             message: 'Authentication successfull',
-            token
           });
         } else {
           res.send({
@@ -90,9 +89,7 @@ router.post('/auth', (req, res) => {
 
 
 // Example of required auth: protect dashboard route with JWT
-router.get('/dashboard', passport.authenticate('jwt', {
-  session: false
-}), function(req, res) {
+router.get('/dashboard', function(req, res) {
   res.send('It worked! User id is: ' + req.user._id + '.');
 });
 

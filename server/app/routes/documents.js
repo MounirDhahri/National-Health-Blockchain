@@ -6,7 +6,7 @@ let passport = require("passport");
 
 
 //Get a User's medical document
-router.get('/', passport.authenticate('jwt', {session: false}), function(req, res) {
+router.get('/', function(req, res) {
   Document.find({citizenKey:req.body.citizenKey},function(err, document){
     if (err){
       return res.json({
@@ -21,7 +21,7 @@ router.get('/', passport.authenticate('jwt', {session: false}), function(req, re
 
 //Create a new document
 //Only the CIO is authorized to add documents
-router.post('/create', passport.authenticate('jwt', {session: false}), function(req, res) {
+router.post('/create', function(req, res) {
   if (req.body.role == "cio") {
     if ( !req.body.date || !req.body.acts ) {
       res.json({
@@ -61,7 +61,7 @@ router.post('/create', passport.authenticate('jwt', {session: false}), function(
 //Modify an existing document
 //Only a doctor is allowed to modify a document
 
-router.post('/update', passport.authenticate('jwt', {session: false}), function(req, res) {
+router.post('/update', function(req, res) {
   if (res.body.role =="doctor") {
     if ( !req.body.id) {
       res.json({

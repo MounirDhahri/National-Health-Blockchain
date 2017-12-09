@@ -1,3 +1,6 @@
+var cors = require('cors')
+
+
 var express = require("express");
 var path = require("path");
 var logger = require('morgan');
@@ -14,6 +17,8 @@ var documents = require("../../app/routes/documents");
 
 
 var app = express();
+
+app.use(cors());
 
 // Connect to database
 mongoose.connect(config.database.local, { useMongoClient: true });

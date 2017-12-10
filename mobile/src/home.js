@@ -68,7 +68,7 @@ class Home extends Component {
               onRead: this.onSuccess.bind(this),
               topContent: (
                 <Text style={styles.centerText}>
-                  National Healthcare
+                  National Health Blockchain
                 </Text>
               ),
               bottomContent: (

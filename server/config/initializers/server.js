@@ -13,6 +13,7 @@ var config = require("../environments/development");
 
 var routes = require("../../app/routes/index");
 var users = require("../../app/routes/users");
+var transactions = require("../../app/routes/transactions");
 var documents = require("../../app/routes/documents");
 
 
@@ -34,6 +35,7 @@ require('./passport')(passport);
 // Routes
 app.use('/', routes);
 app.use('/users', users);
+app.use('/transactions', transactions);
 app.use('/documents', documents);
 
 

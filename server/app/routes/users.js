@@ -75,6 +75,7 @@ router.post('/auth', (req, res) => {
           res.json({
             success: true,
             message: 'Authentication successfull',
+            user:user
           });
         } else {
           res.send({
